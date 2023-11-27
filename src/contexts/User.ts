@@ -29,6 +29,7 @@ class User {
     epochLength: number = 60
     attesterId: string = '1234'
     id: Identity = new Identity()
+    chainId: number = 1
 
     constructor() {
         makeAutoObservable(this)
@@ -102,7 +103,13 @@ class User {
 
     epochKey(nonce: number) {
         const epoch = this.calEpoch()
-        const key = genEpochKey(this.id.secret, this.attesterId, epoch, nonce)
+        const key = genEpochKey(
+            this.id.secret,
+            this.attesterId,
+            epoch,
+            nonce,
+            this.chainId,
+        )
         return `0x${key.toString(16)}`
     }
 
@@ -162,6 +169,7 @@ class User {
             this.attesterId,
             epoch,
             this.provableData,
+            this.chainId,
         )
         stateTree.insert(leaf)
         const index = stateTree.indexOf(leaf)
@@ -174,12 +182,13 @@ class User {
         const attesterId = this.attesterId
         const circuitInputs = stringifyBigInts({
             identity_secret: this.id.secret,
-            state_tree_indexes: stateTreeProof.pathIndices,
+            state_tree_indices: stateTreeProof.pathIndices,
             state_tree_elements: stateTreeProof.siblings,
             data: provableData,
             epoch: epoch,
             attester_id: attesterId,
             value: values,
+            chain_id: this.chainId,
         })
         const { publicSignals, proof } = await prover.genProofAndPublicSignals(
             'dataProof',

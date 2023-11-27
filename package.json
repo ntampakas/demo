@@ -18,8 +18,8 @@
     },
     "dependencies": {
         "@cloudflare/kv-asset-handler": "^0.2.0",
-        "@unirep/circuits": "2.0.0-beta-4",
-        "@unirep/utils": "2.0.0-beta-4",
+        "@unirep/circuits": "2.0.0-beta-5",
+        "@unirep/utils": "2.0.0-beta-5",
         "file-loader": "^6.2.0",
         "mobx-react-lite": "^3.4.0",
         "prettier": "^3.0.3",
