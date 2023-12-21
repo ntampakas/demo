@@ -1,6 +1,6 @@
-import { SnarkProof } from '@unirep/utils'
 import { BigNumberish } from '@ethersproject/bignumber'
 import { BaseProof, Prover } from '@unirep/circuits'
+import { Groth16Proof, PublicSignals } from 'snarkjs'
 
 /**
  * The data proof structure that helps to query the public signals
@@ -19,8 +19,8 @@ export class DataProof extends BaseProof {
      * @param prover The prover that can verify the public signals and the proof
      */
     constructor(
-        _publicSignals: (string | bigint)[],
-        _proof: SnarkProof,
+        _publicSignals: typeof PublicSignals,
+        _proof: typeof Groth16Proof,
         prover?: Prover,
     ) {
         super(_publicSignals, _proof, prover)
