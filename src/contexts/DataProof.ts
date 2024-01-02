@@ -19,8 +19,8 @@ export class DataProof extends BaseProof {
      * @param prover The prover that can verify the public signals and the proof
      */
     constructor(
-        _publicSignals: typeof PublicSignals,
-        _proof: typeof Groth16Proof,
+        _publicSignals: PublicSignals,
+        _proof: Groth16Proof,
         prover?: Prover,
     ) {
         super(_publicSignals, _proof, prover)
